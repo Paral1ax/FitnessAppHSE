@@ -31,6 +31,15 @@ public class GlobalController {
         return "Saved";
     }
 
+    @GetMapping(path="/add")
+    public @ResponseBody Iterable<User> addUser() {
+        // This returns a JSON or XML with the users
+        User n = new User();
+        n.setName("name");
+        n.setEmail("email");
+        userRepository.save(n);
+        return userRepository.findAll();
+    }
     @GetMapping(path="/all")
     public @ResponseBody Iterable<User> getAllUsers() {
         // This returns a JSON or XML with the users
