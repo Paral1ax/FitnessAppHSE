@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name" translatable="false">Fitness application</string>
+    <string name="createAccButton">Create new account</string>
+    <string name="enter">Log in</string>
+    <string name="loginloginhint">Phone or username</string>
+    <string name="login_password_hint">Password</string>
+    <string name="forgot_password"><u>Forgot password?</u></string>
+    <string name="register"><u>Register</u></string>
+    <string name="input_phone_number">Input phone number</string>
+    <string name="phone_number">Phone number</string>
+    <string name="go_next">Next</string>
+    <string name="input_code_textview">Enter the code that was sent to your phone number</string>
+    <string name="code_edit_text">Confirmation code</string>
+    <string name="back_button"><u>Back</u></string>
+    <string name="send_sms_again"><u>Send sms again</u></string>
+    <string name="or">or</string>
+    <string name="change_phone_number"><u>Change phone number</u></string>
+    <string name="log_in"><u>Log in</u></string>
+    <string name="input_personal_data">Input personal information</string>
+    <string name="input_name_and_surname">Name and surname</string>
+    <string name="input_weight">Weight</string>
+    <string name="input_height">Height in cm</string>
+    <string name="input_birthdate">Date of birth</string>
+    <string name="already_have_acc">Already have an account?</string>
+    <string name="incorrectDataInput">Information entered incorrectly.</string>
+    <string name="username_already_taken">This username is already taken</string>
+    <string name="input_username">Enter the username</string>
+    <string name="create_username_textview">Creating a username</string>
+    <string name="choose_username_textview">Choose a username for your new account</string>
+    <string name="register_button">Register</string>
+    <string name="input_username_text">Username</string>
+    <string name="wrong_username_opassword">Неверное имя пользователя или пароль</string>
+    <string name="confirmation_code_error">Код введен неверно</string>
+    <string name="incorrect_number_input">Похоже вы неверно указали номер телефона</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_fitness">Fitness</string>
+    <string name="title_messages">Messenger</string>
+    <string name="title_food">Food</string>
+    <string name="title_profile">Profile</string>
+</resources>

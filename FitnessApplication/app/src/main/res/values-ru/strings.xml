@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="createAccButton">Создать новый аккаунт</string>
+    <string name="enter">Войти</string>
+    <string name="loginloginhint">Телефон или имя пользователя</string>
+    <string name="login_password_hint">Пароль</string>
+    <string name="forgot_password">Забыли пароль?</string>
+    <string name="register">Зарегистрируйтесь</string>
+    <string name="input_phone_number">Введите номер телефона</string>
+    <string name="phone_number">Номер телефона</string>
+    <string name="go_next">Далее</string>
+    <string name="input_code_textview">Введите код, который был отпрален на ваш номер телефона</string>
+    <string name="code_edit_text">Код подтверждения</string>
+    <string name="back_button"><u>Назад</u></string>
+    <string name="send_sms_again">Отправить смс повторно</string>
+    <string name="or">или</string>
+    <string name="change_phone_number">Изменить номер телефона</string>
+    <string name="log_in">Войдите</string>
+    <string name="input_personal_data">Введите персональную информацию</string>
+    <string name="input_name_and_surname">Имя и фамилия</string>
+    <string name="input_weight">Вес</string>
+    <string name="input_height">Рост в см</string>
+    <string name="input_birthdate">Дата рождения</string>
+    <string name="already_have_acc">Уже есть аккаунт?</string>
+    <string name="incorrectDataInput">Введена неверная информация.</string>
+    <string name="username_already_taken">Имя пользователя уже занято</string>
+    <string name="input_username">Введите имя пользователя</string>
+    <string name="create_username_textview">Создание имени пользователя</string>
+    <string name="choose_username_textview">Выберите имя пользователя для своего нового аккаунта</string>
+    <string name="register_button">Зарегистрироваться</string>
+    <string name="input_username_text">Имя пользователя</string>
+    <string name="wrong_username_opassword">Неверное имя пользователя или пароль</string>
+    <string name="confirmation_code_error">Код введен неверно</string>
+    <string name="incorrect_number_input">Похоже вы неверно указали номер телефона</string>
+    <string name="title_activity_main">Основная активность</string>
+    <string name="title_home">Главная</string>
+    <string name="title_fitness">Фитнесс</string>
+    <string name="title_messages">Мессенджер</string>
+    <string name="title_food">Питание</string>
+    <string name="title_profile">Профиль</string>
+</resources>
