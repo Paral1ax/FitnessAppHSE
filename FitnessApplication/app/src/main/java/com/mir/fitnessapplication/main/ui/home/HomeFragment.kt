@@ -9,23 +9,23 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.mir.fitnessapplication.R
+import com.mir.fitnessapplication.main.ui.home.calendar.CalendarView
 
 class HomeFragment : Fragment() {
 
   private lateinit var homeViewModel: HomeViewModel
+  private lateinit var calendarView: CalendarView
 
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
-    homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+    homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
     val root = inflater.inflate(R.layout.fragment_home, container, false)
-    val textView: TextView = root.findViewById(R.id.text_home)
     homeViewModel.text.observe(viewLifecycleOwner, Observer {
-      textView.text = it
     })
+    //calendarView = requireView().findViewById(R.id.calendar_view)
     return root
   }
 }

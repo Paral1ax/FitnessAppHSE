@@ -54,6 +54,7 @@ class RegisterActivity : AppCompatActivity(), SendAuthData, DataPreprocessing {
         ccp?.fullNumberWithPlus;
 
         startActivity(Intent(this@RegisterActivity, EnterCodeActivity::class.java))
+        return true
     }
 
     override fun preprocessing(): Boolean {

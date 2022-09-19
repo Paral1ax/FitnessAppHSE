@@ -8,10 +8,14 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import com.mir.fitnessapplication.R
+import com.mir.fitnessapplication.api.model.Login
+import com.mir.fitnessapplication.api.model.User
+import com.mir.fitnessapplication.api.service.UserClient
 import com.mir.fitnessapplication.entry.ui.SendAuthData
 import com.mir.fitnessapplication.entry.ui.register.RegisterActivity
+import retrofit2.Call
 
-class LoginActivity : AppCompatActivity(), SendAuthData{
+class LoginActivity : AppCompatActivity(){
 
     var loginTextFiled: EditText? = null
     var passwordTextFiled: EditText? = null
@@ -37,8 +41,12 @@ class LoginActivity : AppCompatActivity(), SendAuthData{
         }
         entryButton?.setOnClickListener{
             Log.d("tag", "Enter account activity intent")
-            if (sendAndCheckAuthData())
-                startActivity(Intent(this@LoginActivity, RegisterActivity::class.java)) //TODO Доделать когда доделаю авторизацию
+
+
+
+            startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
+
+            if (1 < 1)
             else {
                 wrongUsernameOrPassword?.visibility = TextView.VISIBLE
             }
@@ -56,7 +64,8 @@ class LoginActivity : AppCompatActivity(), SendAuthData{
         }
     }
 
-    override fun sendAndCheckAuthData(): Boolean {
-        return true
+    private fun login(nickname: String, password: String) {
+        val login: Login = Login(nickname, password)
+        val call: Call<User> = UserClient
     }
 }
