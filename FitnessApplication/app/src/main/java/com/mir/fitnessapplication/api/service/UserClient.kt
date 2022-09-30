@@ -5,12 +5,16 @@ import com.mir.fitnessapplication.api.model.User
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface UserClient {
     @POST("login")
-    fun login(@Body login: Login) : Call<User>
+    suspend fun login(@Body login: Login) : Call<User>
 
-    @GET("secret")
-    fun
+    @GET("basic")
+    suspend fun getUser(@Header("Authorization") authHeader: String): User
+
+    //@GET("secret")
+    //fun
 }

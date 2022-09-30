@@ -22,7 +22,6 @@ class DataActivity : AppCompatActivity(), DataPreprocessing, SendAuthData {
     val gdError = GradientDrawable()
     val gdRight = GradientDrawable()
     var nameAndSurnameText: EditText? = null
-    var password: EditText? = null
     var dateOfBirth: EditText? = null
     var heightParam: EditText? = null
     var weightParam: EditText? = null
@@ -36,7 +35,6 @@ class DataActivity : AppCompatActivity(), DataPreprocessing, SendAuthData {
         setContentView(R.layout.activity_data)
 
         nameAndSurnameText = findViewById(R.id.nameAndSurnameText)
-        password = findViewById(R.id.registerPasswordText)
         dateOfBirth = findViewById(R.id.birthdateRegisterInput)
         heightParam = findViewById(R.id.heightRegisterInput)
         weightParam = findViewById(R.id.weightRegisterInput)
@@ -49,9 +47,6 @@ class DataActivity : AppCompatActivity(), DataPreprocessing, SendAuthData {
 
         nameAndSurnameText?.setOnClickListener {
             nameAndSurnameText?.setBackgroundDrawable(gdRight)
-        }
-        password?.setOnClickListener {
-            password?.setBackgroundDrawable(gdRight)
         }
         dateOfBirth?.setOnClickListener {
             dateOfBirth?.setBackgroundDrawable(gdRight)
@@ -88,10 +83,6 @@ class DataActivity : AppCompatActivity(), DataPreprocessing, SendAuthData {
         val splitName = nameAndSurnameText!!.text.split(" ")
         if (splitName.size < 2) {  //todo проверка на спец символы
             nameAndSurnameText?.setBackgroundDrawable(gdError)
-            exit = false
-        }
-        if (password?.text!!.length < 6) {
-            password?.setBackgroundDrawable(gdError)
             exit = false
         }
         if (dateOfBirth?.text!!.length < 4) {

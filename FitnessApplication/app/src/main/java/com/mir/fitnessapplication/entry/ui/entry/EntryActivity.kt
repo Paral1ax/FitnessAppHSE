@@ -14,8 +14,8 @@ import com.mir.fitnessapplication.entry.ui.register.RegisterActivity
 
 class EntryActivity : AppCompatActivity() {
 
-    var createAccButton: Button? = null
-    var enterAccButton: Button? = null
+    private var createAccButton: Button? = null
+    private var enterAccButton: Button? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
