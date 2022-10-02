@@ -217,7 +217,7 @@
         android:layout_marginEnd="24dp"
         android:text="@string/incorrectDataInput"
         android:textColor="@color/error_color"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"

@@ -5,8 +5,11 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewParent
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.maps.MapView
 import com.mir.fitnessapplication.R
 import java.text.SimpleDateFormat
@@ -31,6 +34,7 @@ open class CalendarView(context: Context?) : LinearLayout(context) {
     val dateFormat: SimpleDateFormat = SimpleDateFormat("MMMM yyyy", Locale.ENGLISH)
     val monthFormat: SimpleDateFormat = SimpleDateFormat("MMMM", Locale.ENGLISH)
     val yearFormat: SimpleDateFormat = SimpleDateFormat("yyyy", Locale.ENGLISH)
+    val eventFormat: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
 
     constructor(context: Context?, attrs: AttributeSet?) : this(context) {
         initialiseLayout()
@@ -77,6 +81,10 @@ open class CalendarView(context: Context?) : LinearLayout(context) {
                 timePickerDialog.show()
             }
 
+            val date = eventFormat.format(dates[position])
+            val month = monthFormat.format(dates[position])
+            val year = yearFormat.format(dates[position])
+
             addEvent.setOnClickListener {
                 setUpCalendar()
                 alertDialog.dismiss()
@@ -86,6 +94,26 @@ open class CalendarView(context: Context?) : LinearLayout(context) {
             alertDialog = builder.create()
             alertDialog.show()
         }
+
+        gridView.setOnItemLongClickListener { parent, view, position, id ->
+            val date = eventFormat.format(dates[position])
+            val builder: AlertDialog.Builder = AlertDialog.Builder(context!!)
+            builder.setCancelable(true)
+            val showView: View = LayoutInflater.from(parent.context).inflate(R.layout.calendar_event_recyclerview, null)
+
+            val eventShowRecycler: RecyclerView = showView.findViewById(R.id.calendar_event_recyclerview)
+            val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(showView.context)
+            eventShowRecycler.layoutManager = layoutManager
+            eventShowRecycler.setHasFixedSize(true)
+
+            val adapter: EventsRecyclerAdapter = EventsRecyclerAdapter(showView.context)
+            return@setOnItemLongClickListener true
+        }
+    }
+
+    private fun collectEventsByDay(date: String) {
+        val events = ArrayList<CalendarEvent>()
+        //2 видео 1.05 минут
     }
 
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int): this(context)
