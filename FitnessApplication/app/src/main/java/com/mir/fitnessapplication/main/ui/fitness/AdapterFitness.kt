@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.mir.fitnessapplication.R
 
-class AdapterFitnes: RecyclerView.Adapter<AdapterFitnes.ViewHolder>() {
+class AdapterFitness: RecyclerView.Adapter<AdapterFitness.ViewHolder>() {
 
     var listFitness = mutableListOf<FitnessItemStorage>()
 

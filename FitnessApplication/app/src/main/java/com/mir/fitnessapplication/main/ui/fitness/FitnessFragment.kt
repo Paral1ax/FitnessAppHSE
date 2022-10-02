@@ -4,11 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mir.fitnessapplication.R
@@ -37,7 +34,7 @@ class FitnessFragment : Fragment() {
     loadRecyclerView()
   }
 
-  fun loadRecyclerView() {
+  private fun loadRecyclerView() {
     var listItem = mutableListOf<FitnessItemStorage>(FitnessItemStorage(R.drawable.ruka, "Накачать базуки", "give fisting my ass"),
       FitnessItemStorage(R.drawable.spins, "Накачать спину", "Хочешь чтобы про тебя говорили что за рама два Вандама?"),
       FitnessItemStorage(R.drawable.pres, "Накачать пресс", "Fucking slaves"),
@@ -45,7 +42,7 @@ class FitnessFragment : Fragment() {
 
     listFitnessItem = view?.findViewById(R.id.ViewFitnessItems)
     listFitnessItem?.layoutManager = LinearLayoutManager(context)
-    val adapter = AdapterFitnes()
+    val adapter = AdapterFitness()
     listFitnessItem?.adapter = adapter
     adapter?.setData(listItem)
   }

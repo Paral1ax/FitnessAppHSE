@@ -21,7 +21,7 @@ class ProfileFragment : Fragment() {
     ): View? {
         messengerViewModel =
             ViewModelProvider(this).get(MessengerViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_messenger, container, false)
+        val root = inflater.inflate(R.layout.fragment_profile, container, false)
         messengerViewModel.text.observe(viewLifecycleOwner, Observer {
 
         })

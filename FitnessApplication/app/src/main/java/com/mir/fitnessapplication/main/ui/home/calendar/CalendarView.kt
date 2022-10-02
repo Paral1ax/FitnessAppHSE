@@ -106,12 +106,12 @@ open class CalendarView(context: Context?) : LinearLayout(context) {
             eventShowRecycler.layoutManager = layoutManager
             eventShowRecycler.setHasFixedSize(true)
 
-            val adapter: EventsRecyclerAdapter = EventsRecyclerAdapter(showView.context)
+            //val adapter: EventsRecyclerAdapter = EventsRecyclerAdapter(collectEventsByDate(),showView.context)
             return@setOnItemLongClickListener true
         }
     }
 
-    private fun collectEventsByDay(date: String) {
+    private fun collectEventsByDate(date: String) {
         val events = ArrayList<CalendarEvent>()
         //2 видео 1.05 минут
     }

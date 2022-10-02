@@ -7,39 +7,39 @@
     android:padding="4dp">
 
     <ImageView
-        android:id="@+id/mainImageItem"
-        android:layout_width="wrap_content"
+        android:id="@+id/eatingImageView"
+        android:layout_width="match_parent"
         android:layout_height="205dp"
-        android:layout_marginBottom="8dp"
         android:padding="8dp"
         android:scaleType="centerCrop"
         android:src="@drawable/nogii"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/mainTextItem"
+        android:id="@+id/eatingTextItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginBottom="48dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="60dp"
         android:text="Упражнения на руки"
         android:textColor="@color/white"
         android:textSize="24dp"
-        app:layout_constraintBottom_toBottomOf="@+id/mainImageItem"
-        app:layout_constraintStart_toStartOf="@+id/mainImageItem" />
+        app:layout_constraintBottom_toBottomOf="@+id/eatingImageView"
+        app:layout_constraintStart_toStartOf="@+id/eatingImageView" />
 
     <TextView
-        android:id="@+id/supportTextItem"
+        android:id="@+id/eatingSupportTextItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="12dp"
         android:text="Хочешь превратить свои проводки в настоящие кабели? Кликай сюда"
         android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="@+id/mainTextItem"
-        app:layout_constraintTop_toBottomOf="@+id/mainTextItem" />
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/eatingImageView"
+        app:layout_constraintStart_toStartOf="@+id/eatingImageView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
