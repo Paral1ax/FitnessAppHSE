@@ -5,8 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.mir.fitnessapplication.R
+import com.mir.fitnessapplication.main.ui.fitness.exercises.ExerciseFragment
 
 class AdapterFitness: RecyclerView.Adapter<AdapterFitness.ViewHolder>() {
 
@@ -30,6 +32,13 @@ class AdapterFitness: RecyclerView.Adapter<AdapterFitness.ViewHolder>() {
         holder.imageView?.setImageResource(listFitness[position].imageIdDrawable)
         holder.mainText?.text = listFitness[position].mainText
         holder.supportText?.text = listFitness[position].supportText
+
+        holder.itemView.setOnClickListener {
+            val activity = it.context as AppCompatActivity
+            val fragment: ExerciseFragment = ExerciseFragment()
+            itemPos = holder.absoluteAdapterPosition
+            activity.supportFragmentManager.beginTransaction().replace(R.id.fitness_constraint, fragment).addToBackStack(null).commit()
+        }
     }
 
     class ViewHolder(itemView: View?): RecyclerView.ViewHolder(itemView!!) {
@@ -41,6 +50,13 @@ class AdapterFitness: RecyclerView.Adapter<AdapterFitness.ViewHolder>() {
             imageView = itemView?.findViewById(R.id.mainImageItem)
             mainText = itemView?.findViewById(R.id.mainTextItem)
             supportText = itemView?.findViewById(R.id.supportTextItem)
+        }
+    }
+    companion object {
+        public var itemPos: Int = 0
+
+        public fun getAdapterPos(): Int {
+            return itemPos
         }
     }
 }
