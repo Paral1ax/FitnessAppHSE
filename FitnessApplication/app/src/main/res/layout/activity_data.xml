@@ -62,8 +62,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="80dp"
         android:layout_marginEnd="70dp"
+        android:layout_marginBottom="16dp"
         android:clickable="true"
         android:focusable="true"
         android:minHeight="48dp"
@@ -71,26 +71,26 @@
         android:textAlignment="textStart"
         android:textColor="@color/white"
         android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/go_nextRegisterButton" />
+        app:layout_constraintStart_toEndOf="@+id/textView4" />
 
     <Button
         android:id="@+id/go_nextRegisterButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="24dp"
         android:layout_marginEnd="60dp"
+        android:layout_marginBottom="24dp"
         android:background="@drawable/entrybuttons"
         android:minHeight="48dp"
         android:text="@string/go_next"
         android:textAllCaps="false"
         android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/loginRegisterTextButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/incorrectDataInput" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/weightRegisterInput"
@@ -200,13 +200,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginBottom="40dp"
         android:text="@string/already_have_acc"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/go_nextRegisterButton" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/incorrectDataInput"
@@ -217,7 +217,7 @@
         android:layout_marginEnd="24dp"
         android:text="@string/incorrectDataInput"
         android:textColor="@color/error_color"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"

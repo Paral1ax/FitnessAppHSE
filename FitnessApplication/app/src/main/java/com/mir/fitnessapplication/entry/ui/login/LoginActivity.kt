@@ -17,51 +17,59 @@ import com.mir.fitnessapplication.main.MainActivity
 
 class LoginActivity : AppCompatActivity(){
 
-    private var loginTextFiled: EditText = findViewById(R.id.editTextTextEmailAddress)
-    private var passwordTextFiled: EditText = findViewById(R.id.editTextTextPassword)
-    private var forgotPasswordText: TextView = findViewById(R.id.forgotPasswordText)
-    private var entryButton: Button = findViewById(R.id.loginEnterButton)
-    private var registerText: TextView = findViewById(R.id.loginRegisterText)
-    private var wrongUsernameOrPassword: TextView = findViewById(R.id.wrongUsernameOrPassword)
-    private var firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
+    private var loginTextFiled: EditText? = null
+    private var passwordTextFiled: EditText? = null
+    private var forgotPasswordText: TextView? = null
+    private var entryButton: Button? = null
+    private var registerText: TextView? = null
+    private var wrongUsernameOrPassword: TextView? = null
+    private var firebaseAuth: FirebaseAuth? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        forgotPasswordText.setOnClickListener{
+        loginTextFiled = findViewById(R.id.editTextTextEmailAddress)
+        passwordTextFiled  = findViewById(R.id.editTextTextPassword)
+        forgotPasswordText = findViewById(R.id.forgotPasswordText)
+        entryButton = findViewById(R.id.loginEnterButton)
+        registerText = findViewById(R.id.loginRegisterText)
+        wrongUsernameOrPassword = findViewById(R.id.wrongUsernameOrPassword)
+        firebaseAuth = FirebaseAuth.getInstance()
+
+        forgotPasswordText?.setOnClickListener{
             Log.d("tag", "account password reset activity intent")
             startActivity(Intent(this@LoginActivity, RegisterActivity::class.java)) //TODO Доделать активити сброса пароля
         }
-        entryButton.setOnClickListener{
+        entryButton?.setOnClickListener{
             Log.d("tag", "Enter account activity intent")
 
-            if (!TextUtils.isEmpty(loginTextFiled.text) && !TextUtils.isEmpty(passwordTextFiled.text)) {
+            //if (!TextUtils.isEmpty(loginTextFiled!!.text) && !TextUtils.isEmpty(passwordTextFiled!!.text)) {
 
-            }
-            startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
+            //}
+            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
 
         }
-        registerText.setOnClickListener{
+        registerText?.setOnClickListener{
             Log.d("tag", "Register activity intent")
             startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
         }
-        loginTextFiled.setOnClickListener{
-            wrongUsernameOrPassword.visibility = TextView.INVISIBLE
+        loginTextFiled?.setOnClickListener{
+            wrongUsernameOrPassword?.visibility = TextView.INVISIBLE
         }
-        passwordTextFiled.setOnClickListener{
-            wrongUsernameOrPassword.visibility = TextView.INVISIBLE
+        passwordTextFiled?.setOnClickListener{
+            wrongUsernameOrPassword?.visibility = TextView.INVISIBLE
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        val currentUser: FirebaseUser? = firebaseAuth.currentUser
+  //override fun onStart() {
+  //    super.onStart()
+  //    val currentUser: FirebaseUser? = firebaseAuth.currentUser
 
-        if (currentUser != null) {
-            var start = startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-        }
-    }
+  //    if (currentUser != null) {
+  //        var start = startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+  //    }
+  //}
 
 
 

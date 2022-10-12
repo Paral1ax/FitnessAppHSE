@@ -35,10 +35,12 @@ class FitnessFragment : Fragment() {
   }
 
   private fun loadRecyclerView() {
-    var listItem = mutableListOf<FitnessItemStorage>(FitnessItemStorage(R.drawable.ruka, "Накачать базуки", "give fisting my ass"),
-      FitnessItemStorage(R.drawable.spins, "Накачать спину", "Хочешь чтобы про тебя говорили что за рама два Вандама?"),
-      FitnessItemStorage(R.drawable.pres, "Накачать пресс", "Fucking slaves"),
-      FitnessItemStorage(R.drawable.nogii, "Накачать ноги", "Торпеды как у Роналдо ждут тебя"),      )
+    var listItem =
+      mutableListOf<FitnessItemStorage>(
+        FitnessItemStorage(R.drawable.ruka, "Накачать руки", "Лучшие упражнения на руки от экспертов"),
+      FitnessItemStorage(R.drawable.spins, "Накачать спину", "Более 10 упражнений для прокачки спины в зале и дома"),
+      FitnessItemStorage(R.drawable.pres, "Накачать пресс", "Топовые упражнения на пресс со своим весом"),
+      FitnessItemStorage(R.drawable.nogii, "Накачать ноги", "Всевозможные упражнения на ноги для прокачки мышц, выносливости и растяжки"),      )
 
     listFitnessItem = view?.findViewById(R.id.ViewFitnessItems)
     listFitnessItem?.layoutManager = LinearLayoutManager(context)

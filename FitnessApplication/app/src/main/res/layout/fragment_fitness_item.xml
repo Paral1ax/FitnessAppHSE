@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
-        android:layout_marginBottom="48dp"
+        android:layout_marginBottom="60dp"
         android:text="Упражнения на руки"
         android:textColor="@color/white"
         android:textSize="24dp"
@@ -35,10 +35,13 @@
 
     <TextView
         android:id="@+id/supportTextItem"
-        android:layout_width="wrap_content"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:text="Хочешь превратить свои проводки в настоящие кабели? Кликай сюда"
         android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.448"
         app:layout_constraintStart_toStartOf="@+id/mainTextItem"
         app:layout_constraintTop_toBottomOf="@+id/mainTextItem" />
 

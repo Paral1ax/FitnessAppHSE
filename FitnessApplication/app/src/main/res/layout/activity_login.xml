@@ -12,8 +12,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="136dp"
-        android:layout_marginTop="36dp"
         android:layout_marginEnd="137dp"
+        android:layout_marginBottom="16dp"
         android:clickable="true"
         android:focusable="true"
         android:minHeight="48dp"
@@ -21,10 +21,10 @@
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginEnterButton" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/logoImage"
@@ -53,6 +53,7 @@
         android:textColorHint="@color/hint_color"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logoImage" />
 
@@ -80,7 +81,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="136dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="137dp"
         android:clickable="true"
         android:focusable="true"
@@ -98,16 +98,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="32dp"
         android:layout_marginEnd="60dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/entrybuttons"
         android:minHeight="48dp"
         android:text="@string/enter"
         android:textAllCaps="false"
         android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/loginRegisterText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/forgotPasswordText" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/wrongUsernameOrPassword"
@@ -118,7 +118,7 @@
         android:layout_marginEnd="24dp"
         android:text="@string/wrong_username_opassword"
         android:textColor="@color/error_color"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />

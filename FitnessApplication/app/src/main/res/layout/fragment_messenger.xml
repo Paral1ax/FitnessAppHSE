@@ -10,14 +10,15 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/messenger_recyclerview"
-        android:layout_width="410dp"
-        android:layout_height="579dp"
+        android:layout_width="match_parent"
+        android:layout_height="560dp"
         android:layout_marginBottom="56dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search_chats_by_usernames"
+        app:layout_constraintVertical_bias="1.0"
         tools:listitem="@layout/single_contact_item" />
 
     <TextView
@@ -29,7 +30,7 @@
         android:layout_marginEnd="32dp"
         android:text="Чаты"
         android:textColor="@color/white"
-        android:textSize="24sp"
+        android:textSize="34sp"
         app:layout_constraintEnd_toStartOf="@+id/add_friend_button"
         app:layout_constraintHorizontal_bias="0.642"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,7 +40,7 @@
         android:id="@+id/add_friend_button"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="9dp"
         android:layout_marginBottom="4dp"
         android:background="@drawable/group_add_asset"
@@ -51,9 +52,9 @@
     <EditText
         android:id="@+id/search_chats_by_usernames"
         android:layout_width="match_parent"
-        android:layout_height="53dp"
+        android:layout_height="48dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:drawableStart="@drawable/ic_baseline_search_24"
         android:drawablePadding="12sp"
@@ -72,10 +73,8 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="9dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/ic_baseline_notifications_24"
-        app:layout_constraintBottom_toTopOf="@+id/search_chats_by_usernames"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />

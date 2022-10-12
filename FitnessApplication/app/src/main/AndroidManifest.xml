@@ -14,35 +14,35 @@ package="com.mir.fitnessapplication">
     android:theme="@style/Theme.AppCompat">
     <activity
         android:name=".entry.ui.register.username.UsernameInputActivity"
-        android:theme="@android:style/Theme.NoTitleBar">
+        android:theme="@style/Theme.AppCompat.NoActionBar">
     </activity>
     <activity
         android:name=".entry.ui.register.data.DataActivity"
-        android:theme="@android:style/Theme.NoTitleBar"/>
+        android:theme="@style/Theme.AppCompat.NoActionBar"/>
     <activity
         android:name=".entry.ui.register.code.EnterCodeActivity"
-        android:theme="@android:style/Theme.NoTitleBar"/>
+        android:theme="@style/Theme.AppCompat.NoActionBar"/>
     <activity
         android:name=".entry.ui.register.RegisterActivity"
-        android:theme="@android:style/Theme.NoTitleBar"/>
+        android:theme="@style/Theme.AppCompat.NoActionBar"/>
     <activity
         android:name=".entry.ui.login.LoginActivity"
-        android:theme="@android:style/Theme.Black.NoTitleBar"/>
+        android:theme="@style/Theme.AppCompat.NoActionBar"/>
     <activity
         android:name=".entry.ui.entry.EntryActivity"
-        android:theme="@android:style/Theme.NoTitleBar">
+        android:theme="@style/Theme.AppCompat.NoActionBar"
+        android:exported="true">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
     </activity>
     <activity
         android:name="com.mir.fitnessapplication.main.MainActivity"
         android:label="@string/title_activity_main"
         android:theme="@style/Theme.AppCompat.NoActionBar"
         android:exported="true">
-
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
     </activity>
 </application>
 

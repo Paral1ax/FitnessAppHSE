@@ -11,9 +11,8 @@
         android:id="@+id/loginRegisterClickableText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="390dp"
         android:layout_marginEnd="92dp"
+        android:layout_marginBottom="46dp"
         android:clickable="true"
         android:focusable="true"
         android:minHeight="48dp"
@@ -21,21 +20,21 @@
         android:textAlignment="textStart"
         android:textColor="@color/white"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerGoesAhead" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
-        android:layout_marginTop="390dp"
+        android:layout_marginBottom="70dp"
         android:text="@string/already_have_acc"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerGoesAhead" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView"
@@ -71,11 +70,12 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
+            app:ccpDialog_textColor="@color/white"
+            app:ccp_autoFormatNumber="true"
             app:ccp_contentColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:ccp_autoFormatNumber="true"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/getPhoneNumber"
@@ -127,7 +127,7 @@
         android:layout_marginEnd="32dp"
         android:text="@string/incorrect_number_input"
         android:textColor="@color/error_color"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />

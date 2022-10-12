@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.mir.fitnessapplication.R
-import com.mir.fitnessapplication.main.ui.fitness.AdapterFitness
+import com.mir.fitnessapplication.main.ui.fitness.exercises.inside.InsideExerciseFragment
 import de.hdodenhof.circleimageview.CircleImageView
 
 class ExerciseRecyclerAdapter: RecyclerView.Adapter<ExerciseRecyclerAdapter.ViewHolder>() {
@@ -43,9 +43,9 @@ class ExerciseRecyclerAdapter: RecyclerView.Adapter<ExerciseRecyclerAdapter.View
 
         holder.itemView.setOnClickListener {
             val activity = it.context as AppCompatActivity
-            val fragment = ExerciseFragment()
-            AdapterFitness.itemPos = holder.absoluteAdapterPosition
-            activity.supportFragmentManager.beginTransaction().replace(R.id.fitness_constraint, fragment).addToBackStack(null).commit()
+            val fragment = InsideExerciseFragment()
+            itemPos = holder.absoluteAdapterPosition
+            activity.supportFragmentManager.beginTransaction().replace(R.id.exercise_constraint, fragment).addToBackStack(null).commit()
         }
     }
 
@@ -54,9 +54,9 @@ class ExerciseRecyclerAdapter: RecyclerView.Adapter<ExerciseRecyclerAdapter.View
     }
 
     companion object {
-        public var itemPos: Int = 0
+        var itemPos: Int = 0
 
-        public fun getAdapterPos(): Int {
+        fun getAdapterPos(): Int {
             return itemPos
         }
     }

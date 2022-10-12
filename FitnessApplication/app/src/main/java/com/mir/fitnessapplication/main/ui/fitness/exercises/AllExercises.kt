@@ -2,7 +2,7 @@ package com.mir.fitnessapplication.main.ui.fitness.exercises
 
 import com.mir.fitnessapplication.R
 
-class AllExercises(val position: Int) {
+class AllExercises(private val position: Int) {
     private val listOfAll = mutableListOf(
         mutableListOf(
             ExerciseItemStorage(R.drawable.bicepc1, "Бицепс","Подъемы штанги стоя"),
@@ -72,7 +72,7 @@ class AllExercises(val position: Int) {
             ExerciseItemStorage(R.drawable.legs15, "Дома","Выпрыгивания"),
             ExerciseItemStorage(R.drawable.legs16, "Растяжка","Глубокие выпады без веса"),
             ExerciseItemStorage(R.drawable.legs17, "Растяжка","Полушпагаты – поперечные и продольные"),
-            ExerciseItemStorage(R.drawable.legs18, "Растяжка","Всевозможные виды шпагатов"),
+            ExerciseItemStorage(R.drawable.legs18, "Растяжка","Шпагаты - поперечные и продольные"),
             ExerciseItemStorage(R.drawable.legs19, "Растяжка","Махи ногами")
         )
 

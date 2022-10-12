@@ -1,6 +1,7 @@
 package com.mir.fitnessapplication.main.ui.fitness.exercises.inside
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,19 +13,15 @@ import com.mir.fitnessapplication.main.ui.fitness.exercises.ExerciseRecyclerAdap
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+import org.w3c.dom.Text
 
 
 class InsideExerciseFragment: Fragment() {
 
-    var youTubePlayerView: YouTubePlayerView? = null
-    var repeats: TextView? = null
-    var povtory: TextView? = null
-
-    init {
-        youTubePlayerView = view?.findViewById(R.id.youtube_player_view)
-        repeats = view?.findViewById(R.id.repeats)
-        povtory = view?.findViewById(R.id.podhodi)
-    }
+    private var youTubePlayerView: YouTubePlayerView? = null
+    private var repeats: TextView? = null
+    private var povtory: TextView? = null
+    lateinit var exerciseName: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,6 +33,7 @@ class InsideExerciseFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        showExerciseInfoAndVideo()
     }
 
     private fun showExerciseInfoAndVideo() {
@@ -43,11 +41,19 @@ class InsideExerciseFragment: Fragment() {
         val pos = ExerciseRecyclerAdapter.getAdapterPos()
 
         val exercise: InsideExerciseItemStorage = InsideExerciseData().mutableList[category][pos]
+        youTubePlayerView = view?.findViewById(R.id.youtube_player_view)
+        repeats = view?.findViewById(R.id.repeats)
+        povtory = view?.findViewById(R.id.podhodi)
+        exerciseName = view?.findViewById(R.id.inside_exercise_name)!!
         youTubePlayerView!!.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
             override fun onReady(youTubePlayer: YouTubePlayer) {
                 youTubePlayer.loadVideo(exercise.youtubeVideo, 0f)
+                youTubePlayer.play()
             }
         })
+        repeats?.text = "${repeats?.text.toString()} ${exercise.repeats}"
+        povtory?.text = "${povtory?.text.toString()} ${exercise.podhodi}"
+        exerciseName.text = exercise.name
 
     }
 }
