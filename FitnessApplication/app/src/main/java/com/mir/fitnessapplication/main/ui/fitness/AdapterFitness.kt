@@ -10,7 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mir.fitnessapplication.R
 import com.mir.fitnessapplication.main.ui.fitness.exercises.ExerciseFragment
 
-class AdapterFitness: RecyclerView.Adapter<AdapterFitness.ViewHolder>() {
+class AdapterFitness() : RecyclerView.Adapter<AdapterFitness.ViewHolder>(
+) {
 
     var listFitness = mutableListOf<FitnessItemStorage>()
 
@@ -24,7 +25,8 @@ class AdapterFitness: RecyclerView.Adapter<AdapterFitness.ViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.fragment_fitness_item, parent, false)
+        val itemView = LayoutInflater.from(parent.context)
+            .inflate(R.layout.fragment_fitness_item, parent, false)
         return ViewHolder(itemView)
     }
 
@@ -37,11 +39,12 @@ class AdapterFitness: RecyclerView.Adapter<AdapterFitness.ViewHolder>() {
             val activity = it.context as AppCompatActivity
             val fragment: ExerciseFragment = ExerciseFragment()
             itemPos = holder.absoluteAdapterPosition
-            activity.supportFragmentManager.beginTransaction().replace(R.id.fitness_constraint, fragment).addToBackStack(null).commit()
+            activity.supportFragmentManager.beginTransaction()
+                .replace(R.id.nav_host_fragment, fragment).addToBackStack(null).commit()
         }
     }
 
-    class ViewHolder(itemView: View?): RecyclerView.ViewHolder(itemView!!) {
+    class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
         var imageView: ImageView? = null
         var mainText: TextView? = null
         var supportText: TextView? = null
@@ -52,6 +55,7 @@ class AdapterFitness: RecyclerView.Adapter<AdapterFitness.ViewHolder>() {
             supportText = itemView?.findViewById(R.id.supportTextItem)
         }
     }
+
     companion object {
         public var itemPos: Int = 0
 

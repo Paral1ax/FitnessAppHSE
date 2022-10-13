@@ -56,4 +56,9 @@ class InsideExerciseFragment: Fragment() {
         exerciseName.text = exercise.name
 
     }
+
+    override fun onDestroy() {
+        youTubePlayerView?.release()
+        super.onDestroy()
+    }
 }

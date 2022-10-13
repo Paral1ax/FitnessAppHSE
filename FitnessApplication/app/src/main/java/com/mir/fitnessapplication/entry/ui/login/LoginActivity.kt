@@ -7,11 +7,13 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.mir.fitnessapplication.R
 import com.mir.fitnessapplication.entry.ui.register.RegisterActivity
+import com.mir.fitnessapplication.entry.ui.register.data.FirebaseURL
 import com.mir.fitnessapplication.main.MainActivity
 
 
@@ -44,10 +46,14 @@ class LoginActivity : AppCompatActivity(){
         entryButton?.setOnClickListener{
             Log.d("tag", "Enter account activity intent")
 
-            //if (!TextUtils.isEmpty(loginTextFiled!!.text) && !TextUtils.isEmpty(passwordTextFiled!!.text)) {
+            if (!TextUtils.isEmpty(loginTextFiled!!.text) && !TextUtils.isEmpty(passwordTextFiled!!.text)) {
 
-            //}
-            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                try {
+                    signIn()
+                } catch (e: Exception) {
+
+                }
+            }
 
         }
         registerText?.setOnClickListener{
@@ -62,15 +68,33 @@ class LoginActivity : AppCompatActivity(){
         }
     }
 
-  //override fun onStart() {
-  //    super.onStart()
-  //    val currentUser: FirebaseUser? = firebaseAuth.currentUser
+    override fun onStart() {
+        super.onStart()
+        val currentUser: FirebaseUser? = firebaseAuth?.currentUser
+        if (currentUser != null) {
+            var start = startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+        }
+    }
 
-  //    if (currentUser != null) {
-  //        var start = startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-  //    }
-  //}
+    private fun signIn() {
+        firebaseAuth?.signInWithEmailAndPassword(loginTextFiled?.text.toString(), passwordTextFiled?.text.toString())
+            ?.addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d("tag", "signInWithEmail:success")
+                    val user = firebaseAuth!!.currentUser
+                    updateUI(user)
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w("tag", "signInWithEmail:failure", task.exception)
+                    wrongUsernameOrPassword?.visibility = TextView.VISIBLE
+                }
+            }
+    }
 
+    private fun updateUI(user: FirebaseUser?) {
+        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+    }
 
 
 }

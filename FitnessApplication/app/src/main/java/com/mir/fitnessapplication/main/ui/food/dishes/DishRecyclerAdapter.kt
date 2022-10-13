@@ -47,7 +47,7 @@ class DishRecyclerAdapter: RecyclerView.Adapter<DishRecyclerAdapter.ViewHolder>(
             val activity = it.context as AppCompatActivity
             val fragment = InsideDishFragment()
             itemPos = holder.absoluteAdapterPosition
-            activity.supportFragmentManager.beginTransaction().replace(R.id.dishes_constraint, fragment).addToBackStack(null).commit()
+            activity.supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, fragment).addToBackStack(null).commit()
         }
     }
 

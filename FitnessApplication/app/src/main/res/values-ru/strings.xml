@@ -26,7 +26,7 @@
     <string name="username_already_taken">Имя пользователя уже занято</string>
     <string name="input_username">Введите имя пользователя</string>
     <string name="create_username_textview">Создание имени пользователя</string>
-    <string name="choose_username_textview">Выберите имя пользователя для своего нового аккаунта</string>
+    <string name="choose_username_textview">Введите почту для своего нового аккаунта</string>
     <string name="register_button">Зарегистрироваться</string>
     <string name="input_username_text">Имя пользователя</string>
     <string name="wrong_username_opassword">Неверное имя пользователя или пароль</string>

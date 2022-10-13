@@ -45,7 +45,7 @@ class ExerciseRecyclerAdapter: RecyclerView.Adapter<ExerciseRecyclerAdapter.View
             val activity = it.context as AppCompatActivity
             val fragment = InsideExerciseFragment()
             itemPos = holder.absoluteAdapterPosition
-            activity.supportFragmentManager.beginTransaction().replace(R.id.exercise_constraint, fragment).addToBackStack(null).commit()
+            activity.supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, fragment).addToBackStack(null).commit()
         }
     }
 

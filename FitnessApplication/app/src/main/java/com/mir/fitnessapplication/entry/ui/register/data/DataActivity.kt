@@ -4,44 +4,45 @@ import android.content.Intent
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.view.View
-import android.widget.AbsListView
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.mir.fitnessapplication.R
-import com.mir.fitnessapplication.entry.ui.SendAuthData
-import com.mir.fitnessapplication.entry.ui.login.DataPreprocessing
-import com.mir.fitnessapplication.entry.ui.login.LoginActivity
-import com.mir.fitnessapplication.entry.ui.register.username.UsernameInputActivity
+import com.mir.fitnessapplication.main.MainActivity
 
 
-class DataActivity : AppCompatActivity(), DataPreprocessing, SendAuthData {
+class DataActivity : AppCompatActivity(){
 
     val gdError = GradientDrawable()
     val gdRight = GradientDrawable()
+    var username: EditText? = null
     var nameAndSurnameText: EditText? = null
     var dateOfBirth: EditText? = null
-    var heightParam: EditText? = null
-    var weightParam: EditText? = null
     var incorrectInput: TextView? = null
     var goAheadButton: Button? = null
     var goToLoginText: TextView? = null
-    var gender: RecyclerView? = null
+    var auth: FirebaseAuth? = null
+    var database: FirebaseDatabase? = null
+    var databaseReference: DatabaseReference? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_data)
 
+        username = findViewById(R.id.username_data_textfield)
         nameAndSurnameText = findViewById(R.id.nameAndSurnameText)
-        dateOfBirth = findViewById(R.id.birthdateRegisterInput)
-        heightParam = findViewById(R.id.heightRegisterInput)
-        weightParam = findViewById(R.id.weightRegisterInput)
         incorrectInput = findViewById(R.id.incorrectDataInput)
         goAheadButton = findViewById(R.id.go_nextRegisterButton)
         goToLoginText = findViewById(R.id.loginRegisterTextButton)
-        gender = findViewById(R.id.gender)
+        auth = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance(FirebaseURL.DATABASE_URL)
+        databaseReference = database!!.getReference("UserData")
+
         gdError.setStroke(1, resources.getColor(R.color.error_color,null))
         gdRight.setStroke(1, resources.getColor(R.color.grey,null))
 
@@ -51,54 +52,33 @@ class DataActivity : AppCompatActivity(), DataPreprocessing, SendAuthData {
         dateOfBirth?.setOnClickListener {
             dateOfBirth?.setBackgroundDrawable(gdRight)
         }
-        heightParam?.setOnClickListener {
-            heightParam?.setBackgroundDrawable(gdRight)
-        }
-        weightParam?.setOnClickListener {
-            weightParam?.setBackgroundDrawable(gdRight)
-        }
-        gender?.setOnClickListener {
-            gender?.setBackgroundDrawable(gdRight)
-        }
         goAheadButton?.setOnClickListener {
-            if (!preprocessing()) {
-                incorrectInput?.visibility = View.VISIBLE
-            }
-            else if (sendAndCheckAuthData()) {
-                startActivity(Intent(this@DataActivity, UsernameInputActivity::class.java))
-            }
+            addUserData()
         }
         goToLoginText?.setOnClickListener {
 
         }
     }
 
-    override fun sendAndCheckAuthData(): Boolean {
-        TODO("Not yet implemented")
-    }
+    private fun addUserData() {
+        if (auth?.currentUser != null){
 
-    override fun preprocessing(): Boolean {
-        incorrectInput?.visibility = View.INVISIBLE
-        var exit: Boolean = true
-        val splitName = nameAndSurnameText!!.text.split(" ")
-        if (splitName.size < 2) {  //todo проверка на спец символы
-            nameAndSurnameText?.setBackgroundDrawable(gdError)
-            exit = false
-        }
-        if (dateOfBirth?.text!!.length < 4) {
-            dateOfBirth?.setBackgroundDrawable(gdError)
-            exit = false
-        }
-        if (heightParam?.text!!.length != 3) {
-            heightParam?.setBackgroundDrawable(gdError)
-            exit = false
-        }
-        if (weightParam?.text!!.length < 2 || weightParam?.text!!.length > 3) {
-            weightParam?.setBackgroundDrawable(gdError)
-            exit = false
-        }
-        //Todo проверка ресайклер вью
+            if (username?.text!!.isNotEmpty() && nameAndSurnameText?.text!!.length > 5) {
+                val data = UserData(username!!.text.toString(), nameAndSurnameText!!.text.toString())
+                database?.getReference("UserData")
+                    ?.child(FirebaseAuth.getInstance().currentUser!!.uid)!!.setValue(data)
+                    .addOnCompleteListener {
+                        Toast.makeText(this@DataActivity, "Successful Registered", Toast.LENGTH_SHORT).show()
+                        print("Show")
+                    }
+                val intent = Intent(this@DataActivity, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            } else incorrectInput?.visibility =TextView.INVISIBLE
 
-        return exit
+        } else {
+
+        }
+
     }
 }

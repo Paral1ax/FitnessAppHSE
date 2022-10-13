@@ -93,33 +93,11 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/weightRegisterInput"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        android:autofillHints=""
-        android:background="@drawable/login_text"
-        android:ems="10"
-        android:hint="@string/input_weight"
-        android:inputType="number"
-        android:padding="8dp"
-        android:textColor="@color/white"
-        android:textColorHint="@color/hint_color"
-        android:textSize="18sp"
-        app:errorEnabled="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/heightRegisterInput" />
-
-    <EditText
         android:id="@+id/nameAndSurnameText"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:autofillHints=""
         android:background="@drawable/login_text"
@@ -134,50 +112,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
-
-    <EditText
-        android:id="@+id/heightRegisterInput"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        android:autofillHints=""
-        android:background="@drawable/login_text"
-        android:ems="10"
-        android:hint="@string/input_height"
-        android:inputType="number"
-        android:padding="8dp"
-        android:textColor="@color/white"
-        android:textColorHint="@color/hint_color"
-        android:textSize="18sp"
-        app:errorEnabled="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/birthdateRegisterInput" />
-
-    <EditText
-        android:id="@+id/birthdateRegisterInput"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        android:autofillHints=""
-        android:background="@drawable/login_text"
-        android:ems="10"
-        android:hint="@string/input_birthdate"
-        android:inputType="date"
-        android:padding="8dp"
-        android:textColor="@color/white"
-        android:textColorHint="@color/hint_color"
-        android:textSize="18sp"
-        app:errorEnabled="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameAndSurnameText" />
 
     <TextView
         android:id="@+id/textView2"
@@ -213,7 +147,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:text="@string/incorrectDataInput"
         android:textColor="@color/error_color"
@@ -221,18 +155,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gender" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/gender"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/login_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/weightRegisterInput" />
+        app:layout_constraintTop_toBottomOf="@+id/nameAndSurnameText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

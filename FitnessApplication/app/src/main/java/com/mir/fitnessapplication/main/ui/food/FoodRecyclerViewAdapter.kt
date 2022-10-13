@@ -40,7 +40,7 @@ class FoodRecyclerViewAdapter: RecyclerView.Adapter<FoodRecyclerViewAdapter.View
             val activity = it.context as AppCompatActivity
             val fragment: DishFragment = DishFragment()
             itemPos = holder.absoluteAdapterPosition
-            activity.supportFragmentManager.beginTransaction().replace(R.id.food_constrained, fragment).addToBackStack(null).commit()
+            activity.supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, fragment).addToBackStack(null).commit()
         }
     }
 

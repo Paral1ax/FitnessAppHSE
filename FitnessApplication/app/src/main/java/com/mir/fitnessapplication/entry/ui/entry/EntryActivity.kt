@@ -11,6 +11,7 @@ import android.widget.Button
 import com.mir.fitnessapplication.R
 import com.mir.fitnessapplication.entry.ui.login.LoginActivity
 import com.mir.fitnessapplication.entry.ui.register.RegisterActivity
+import com.mir.fitnessapplication.entry.ui.register.username.UsernameInputActivity
 
 class EntryActivity : AppCompatActivity() {
 
@@ -26,7 +27,7 @@ class EntryActivity : AppCompatActivity() {
 
         createAccButton?.setOnClickListener {
             Log.d("tag", "create account activity intent")
-            startActivity(Intent(this@EntryActivity, RegisterActivity::class.java))
+            startActivity(Intent(this@EntryActivity, UsernameInputActivity::class.java))
         }
         enterAccButton?.setOnClickListener{
             Log.d("tag", "enter account activity intent")
