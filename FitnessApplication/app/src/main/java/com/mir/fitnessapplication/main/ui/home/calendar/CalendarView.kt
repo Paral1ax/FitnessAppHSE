@@ -11,7 +11,12 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.maps.MapView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.mir.fitnessapplication.R
+import com.mir.fitnessapplication.entry.ui.register.data.FirebaseURL
+import com.mir.fitnessapplication.entry.ui.register.data.UserData
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -30,6 +35,10 @@ open class CalendarView(context: Context?) : LinearLayout(context) {
     lateinit var alertDialog: AlertDialog
     private var dates: MutableList<Date> = ArrayList()
     private var events: MutableList<CalendarEvent> = ArrayList()
+
+    var auth = FirebaseAuth.getInstance()
+    var database = FirebaseDatabase.getInstance(FirebaseURL.DATABASE_URL)
+    var databaseReference = database!!.getReference("UserEvent")
 
     val dateFormat: SimpleDateFormat = SimpleDateFormat("MMMM yyyy", Locale.ENGLISH)
     val monthFormat: SimpleDateFormat = SimpleDateFormat("MMMM", Locale.ENGLISH)
@@ -86,6 +95,8 @@ open class CalendarView(context: Context?) : LinearLayout(context) {
             val year = yearFormat.format(dates[position])
 
             addEvent.setOnClickListener {
+                val event: CalendarEvent = CalendarEvent(eventName.text.toString(),eventTime.text.toString(),date, month, year, place.text.toString(), comment.text.toString(), "Я")
+                saveEvent(event)
                 setUpCalendar()
                 alertDialog.dismiss()
             }
@@ -94,6 +105,8 @@ open class CalendarView(context: Context?) : LinearLayout(context) {
             alertDialog = builder.create()
             alertDialog.show()
         }
+
+
 
         gridView.setOnItemLongClickListener { parent, view, position, id ->
             val date = eventFormat.format(dates[position])
@@ -149,7 +162,11 @@ open class CalendarView(context: Context?) : LinearLayout(context) {
 
     }
 
-    private fun saveEvent() {
-
+    private fun saveEvent(event: CalendarEvent) {
+        database?.getReference("UserEvent")
+            ?.child(FirebaseAuth.getInstance().currentUser!!.uid)?.child(event.date + event.time)!!.setValue(event)
+            .addOnCompleteListener {
+                Toast.makeText(this.context, "Успешно сохранено", Toast.LENGTH_SHORT).show()
+            }
     }
 }

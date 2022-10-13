@@ -1,5 +1,6 @@
 package com.mir.fitnessapplication.main.ui.messenger.friends
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,21 +10,41 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.mir.fitnessapplication.R
+import com.mir.fitnessapplication.entry.ui.register.data.FirebaseURL
 import com.mir.fitnessapplication.entry.ui.register.data.UserData
+import com.mir.fitnessapplication.main.ui.messenger.FriendWith
 import com.mir.fitnessapplication.main.ui.messenger.MessengerRecyclerAdapter
 import de.hdodenhof.circleimageview.CircleImageView
+import kotlin.coroutines.CoroutineContext
 
-class AddFriendRecyclerAdapter: RecyclerView.Adapter<AddFriendRecyclerAdapter.ViewHolder>() {
+class AddFriendRecyclerAdapter(): RecyclerView.Adapter<AddFriendRecyclerAdapter.ViewHolder>() {
+
+    var context: Context? = null
+
+    constructor(context: Context, recyclerViewClickListener: RecyclerViewClickListener) : this() {
+        this.context = context
+        recyclerClickListener = recyclerViewClickListener
+    }
 
     private var friends = mutableListOf<ShowFriend>()
+    var database: FirebaseDatabase? = null
+    var databaseReference: DatabaseReference? = null
 
     fun setData(exercisesList: List<ShowFriend>) {
         this.friends.clear()
         this.friends.addAll(exercisesList)
     }
 
-    class ViewHolder(itemView: View?): RecyclerView.ViewHolder(itemView!!) {
+    init {
+        database = FirebaseDatabase.getInstance(FirebaseURL.DATABASE_URL)
+        databaseReference = database!!.getReference("FriendWith")
+
+    }
+
+    class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
         var image: CircleImageView? = null
         var name: TextView? = null
         var isCoach: SwitchCompat? = null
@@ -36,7 +57,6 @@ class AddFriendRecyclerAdapter: RecyclerView.Adapter<AddFriendRecyclerAdapter.Vi
             addFriendButton = itemView?.findViewById(R.id.add_friend_button)
         }
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.single_add_friend_item, parent, false)
         return ViewHolder(itemView)
@@ -46,9 +66,6 @@ class AddFriendRecyclerAdapter: RecyclerView.Adapter<AddFriendRecyclerAdapter.Vi
         holder.image?.setImageResource(R.drawable.lunch1)
         holder.name?.text = friends[position].name
         holder.isCoach!!.isChecked = true
-        holder.addFriendButton?.setOnClickListener {
-            subscribeOnUser()
-        }
     }
 
     override fun getItemCount(): Int {
@@ -61,9 +78,14 @@ class AddFriendRecyclerAdapter: RecyclerView.Adapter<AddFriendRecyclerAdapter.Vi
         fun getAdapterPos(): Int {
             return itemPos
         }
-    }
 
-    private fun subscribeOnUser() {
-        //Добавление в список друзей
+        class ItemViewHolder(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener {
+            override fun onClick(p0: View?) {
+                recyclerClickListener?.recyclerViewListClicked(p0, layoutPosition)
+
+            }
+        }
+
+        var recyclerClickListener: RecyclerViewClickListener? = null
     }
 }

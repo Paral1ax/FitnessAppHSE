@@ -69,7 +69,6 @@ class DataActivity : AppCompatActivity(){
                     ?.child(FirebaseAuth.getInstance().currentUser!!.uid)!!.setValue(data)
                     .addOnCompleteListener {
                         Toast.makeText(this@DataActivity, "Successful Registered", Toast.LENGTH_SHORT).show()
-                        print("Show")
                     }
                 val intent = Intent(this@DataActivity, MainActivity::class.java)
                 startActivity(intent)
