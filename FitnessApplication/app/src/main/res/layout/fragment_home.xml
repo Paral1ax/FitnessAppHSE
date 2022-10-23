@@ -24,7 +24,7 @@
 
         <com.mir.fitnessapplication.main.ui.home.calendar.CalendarView
             android:layout_width="match_parent"
-            android:layout_height="410dp" />
+            android:layout_height="460dp" />
 
         <View
             android:id="@+id/view"

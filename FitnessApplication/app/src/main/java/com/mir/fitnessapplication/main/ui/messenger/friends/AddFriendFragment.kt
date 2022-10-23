@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,6 +29,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
+import org.w3c.dom.Text
 
 
 class AddFriendFragment: Fragment(), RecyclerViewClickListener {
@@ -35,10 +37,14 @@ class AddFriendFragment: Fragment(), RecyclerViewClickListener {
     private var searchFriends: EditText? = null
     private var auth: FirebaseAuth? = null
     var database: FirebaseDatabase? = null
-    var databaseReference: DatabaseReference? = null
     var list: ArrayList<ShowFriend>? = null
     var refresh: SwipeRefreshLayout? = null
+
     var button: Button? = null
+    var picture: CircleImageView? = null
+    var name: TextView? = null
+    var isCoach: SwitchCompat? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -53,7 +59,6 @@ class AddFriendFragment: Fragment(), RecyclerViewClickListener {
         searchFriends = view.findViewById(R.id.add_friends_by_usernames)
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance(FirebaseURL.DATABASE_URL)
-        databaseReference = database!!.getReference("UserData")
         refresh = view.findViewById(R.id.swipe_refresh_layout)
         list = ArrayList()
         loadRecyclerView(list!!)
@@ -71,12 +76,13 @@ class AddFriendFragment: Fragment(), RecyclerViewClickListener {
 
     private fun getUsersByNameAndSurname(nameAndSurname: String): ArrayList<ShowFriend> {
         val usersList = ArrayList<ShowFriend>()
+        val reference = database?.getReference("UserData")
         val valueEventListener = object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (ds in snapshot.children) {
                     val userdata = ds.getValue(UserData::class.java)
                     if (userdata!!.name.contains(nameAndSurname)) {
-                        usersList.add(ShowFriend(databaseReference?.child("posts")!!.push().key!!, userdata.name, userdata.username, true))
+                        usersList.add(ShowFriend(reference?.child("posts")!!.push().key!!, userdata.name, userdata.username, true))
                     }
                 }
             }
@@ -86,7 +92,7 @@ class AddFriendFragment: Fragment(), RecyclerViewClickListener {
             }
 
         }
-        databaseReference!!.addValueEventListener(valueEventListener)
+        reference!!.addValueEventListener(valueEventListener)
         return usersList
 
     }
@@ -107,16 +113,25 @@ class AddFriendFragment: Fragment(), RecyclerViewClickListener {
         }
     }
     override fun recyclerViewListClicked(v: View?, position: Int) {
+        picture = v?.findViewById(R.id.single_add_friend_pic)
+        name = v?.findViewById(R.id.single_add_friend_name)
+        isCoach = v?.findViewById(R.id.is_coach_switch)
         button = v?.findViewById(R.id.add_friend_button)
 
+
         button?.setOnClickListener {
-            //subscribeOnUser()
+            val chosen = list?.get(position)
+            subscribeOnUser(chosen!!)
         }
     }
 
 
-    private fun subscribeOnUser(isChecked: Boolean, friendWith: FriendWith) {
-
+    private fun subscribeOnUser(subscribeOn: ShowFriend) {
+        val reference = database?.getReference("Subscribed")
+        reference?.child(FirebaseAuth.getInstance().currentUser!!.uid)!!.setValue(subscribeOn)
+            .addOnCompleteListener {
+                Toast.makeText(this.context, "Successful Registered", Toast.LENGTH_SHORT).show()
+            }
     }
 
 }

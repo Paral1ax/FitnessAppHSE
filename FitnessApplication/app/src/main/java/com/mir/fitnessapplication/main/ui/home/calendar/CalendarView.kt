@@ -2,7 +2,9 @@ package com.mir.fitnessapplication.main.ui.home.calendar
 
 import android.app.TimePickerDialog
 import android.content.Context
+import android.text.TextUtils
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewParent
@@ -12,12 +14,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.maps.MapView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import com.mir.fitnessapplication.R
 import com.mir.fitnessapplication.entry.ui.register.data.FirebaseURL
 import com.mir.fitnessapplication.entry.ui.register.data.UserData
+import com.mir.fitnessapplication.main.ui.messenger.friends.ShowFriend
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
+import java.time.Year
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -95,7 +101,7 @@ open class CalendarView(context: Context?) : LinearLayout(context) {
             val year = yearFormat.format(dates[position])
 
             addEvent.setOnClickListener {
-                val event: CalendarEvent = CalendarEvent(eventName.text.toString(),eventTime.text.toString(),date, month, year, place.text.toString(), comment.text.toString(), "Я")
+                val event = CalendarEvent(eventName.text.toString(),eventTime.text.toString(),date, month, year, place.text.toString(), comment.text.toString(), "Я")
                 saveEvent(event)
                 setUpCalendar()
                 alertDialog.dismiss()
@@ -126,7 +132,6 @@ open class CalendarView(context: Context?) : LinearLayout(context) {
 
     private fun collectEventsByDate(date: String) {
         val events = ArrayList<CalendarEvent>()
-        //2 видео 1.05 минут
     }
 
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int): this(context)
@@ -147,26 +152,80 @@ open class CalendarView(context: Context?) : LinearLayout(context) {
         monthCalendar.set(Calendar.DAY_OF_MONTH, 1)
         val firstDayOfMonth = monthCalendar.get(Calendar.DAY_OF_WEEK) - 1
         monthCalendar.add(Calendar.DAY_OF_MONTH, -firstDayOfMonth)
+        CoroutineScope(Dispatchers.IO).launch {
+            collectEventsPerMonth(monthFormat.format(calendar.time), yearFormat.format(calendar.time))
+            while (dates.size < MAX_CALENDAR_DAYS) {
+                dates.add(monthCalendar.time)
+                monthCalendar.add(Calendar.DAY_OF_MONTH, 1)
 
-        while (dates.size < MAX_CALENDAR_DAYS) {
-            dates.add(monthCalendar.time)
-            monthCalendar.add(Calendar.DAY_OF_MONTH, 1)
+            }
 
+            gridAdapter = CalendarGridAdapter(context, dates, calendar, events)
+            gridView.adapter = gridAdapter
         }
 
-        gridAdapter = CalendarGridAdapter(context, dates, calendar, events)
-        gridView.adapter = gridAdapter
     }
 
-    private fun collectEvents() {
+    private fun collectEventsPerMonth(month: String, year: String) {
+        events.clear()
+        val convertedMonth = convertStringToMonthNum(month)
+        val reference = database.getReference("UserEvent")
+        val valueEventListener = object: ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (users in snapshot.children) {
+                    if (users.key == auth.uid) {
+                        for (date in users.children) {
+                            val mnth = date.key!!.split('-')[1]
+                            val yr = date.key!!.split('-')[0]
 
+                            if (convertedMonth.toString() == mnth && year == yr) {
+                                for (time in date.children) {
+
+                                    val event = time.getValue(CalendarEvent::class.java)
+                                    events.add(event!!)
+                                }
+                            }
+                        }
+                    }
+                }
+                Log.d("Events", events.toString())
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        }
+        reference.addValueEventListener(valueEventListener)
     }
 
     private fun saveEvent(event: CalendarEvent) {
-        database?.getReference("UserEvent")
-            ?.child(FirebaseAuth.getInstance().currentUser!!.uid)?.child(event.date + event.time)!!.setValue(event)
-            .addOnCompleteListener {
-                Toast.makeText(this.context, "Успешно сохранено", Toast.LENGTH_SHORT).show()
-            }
+        if (!TextUtils.isEmpty(event.event) && !TextUtils.isEmpty(event.time)) {
+            database.getReference("UserEvent")
+                .child(FirebaseAuth.getInstance().currentUser!!.uid).child(event.date)
+                .child(event.time).setValue(event)
+                .addOnCompleteListener {
+                    Toast.makeText(this.context, "Успешно сохранено", Toast.LENGTH_SHORT).show()
+                }
+        }
+    }
+
+    private fun convertStringToMonthNum(month: String): Int {
+        val mnth = when (month) {
+            "January" -> 1
+            "February" -> 2
+            "March" -> 3
+            "April" -> 4
+            "May" -> 5
+            "June" -> 6
+            "July" -> 7
+            "August" -> 8
+            "September" -> 9
+            "October" -> 10
+            "November" -> 11
+            "December" -> 12
+            else -> 1
+        }
+        return mnth
     }
 }

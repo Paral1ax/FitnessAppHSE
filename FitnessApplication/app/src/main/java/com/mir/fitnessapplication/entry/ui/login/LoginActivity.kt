@@ -59,6 +59,7 @@ class LoginActivity : AppCompatActivity(){
         registerText?.setOnClickListener{
             Log.d("tag", "Register activity intent")
             startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
+            this.finish()
         }
         loginTextFiled?.setOnClickListener{
             wrongUsernameOrPassword?.visibility = TextView.INVISIBLE
@@ -84,6 +85,7 @@ class LoginActivity : AppCompatActivity(){
                     Log.d("tag", "signInWithEmail:success")
                     val user = firebaseAuth!!.currentUser
                     updateUI(user)
+                    this.finish()
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w("tag", "signInWithEmail:failure", task.exception)

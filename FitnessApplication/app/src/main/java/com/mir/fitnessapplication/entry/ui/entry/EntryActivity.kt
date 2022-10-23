@@ -28,10 +28,12 @@ class EntryActivity : AppCompatActivity() {
         createAccButton?.setOnClickListener {
             Log.d("tag", "create account activity intent")
             startActivity(Intent(this@EntryActivity, UsernameInputActivity::class.java))
+            this.finish()
         }
         enterAccButton?.setOnClickListener{
             Log.d("tag", "enter account activity intent")
             startActivity(Intent(this@EntryActivity, LoginActivity::class.java))
+            this.finish()
         }
     }
 }
