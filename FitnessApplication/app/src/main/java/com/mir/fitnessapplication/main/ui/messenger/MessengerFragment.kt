@@ -13,8 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import com.mir.fitnessapplication.R
 import com.mir.fitnessapplication.entry.ui.register.data.FirebaseURL
 import com.mir.fitnessapplication.entry.ui.register.data.UserData
@@ -22,6 +21,7 @@ import com.mir.fitnessapplication.main.ui.food.FoodRecyclerViewAdapter
 import com.mir.fitnessapplication.main.ui.food.dishes.AllDishes
 import com.mir.fitnessapplication.main.ui.food.dishes.DishRecyclerAdapter
 import com.mir.fitnessapplication.main.ui.messenger.friends.AddFriendFragment
+import com.mir.fitnessapplication.main.ui.messenger.friends.ShowFriend
 
 class MessengerFragment : Fragment() {
 
@@ -66,11 +66,33 @@ class MessengerFragment : Fragment() {
         mRecyclerView!!.layoutManager = LinearLayoutManager(context)
         val adapter = MessengerRecyclerAdapter()
         mRecyclerView?.adapter = adapter
-        val list = mutableListOf(UserData("abba", "babba"))
+        val list = mutableListOf(UserData("abba", "babba", "1", "0", AppStates.ONLINE.state))
         adapter.setData(list)
     }
 
-    private fun getAllFriends() {
+    private fun getAllSubscribers(): ArrayList<ShowFriend> {
+        val friends = ArrayList<ShowFriend>()
+        val valueEventListener = object: ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (ds in snapshot.children) {
+                    val userdata = ds.getValue(ShowFriend::class.java)
+                    if (databaseReference?.child("posts")!!.push().key!! == auth?.uid) {
+
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        }
+        databaseReference!!.addValueEventListener(valueEventListener)
+        return friends
+
+    }
+
+    private fun findFriendById(id: String) {
 
     }
 }

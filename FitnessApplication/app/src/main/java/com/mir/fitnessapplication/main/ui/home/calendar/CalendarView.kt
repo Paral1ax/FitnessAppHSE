@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewParent
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.maps.MapView
@@ -157,22 +158,26 @@ open class CalendarView(context: Context?) : LinearLayout(context) {
             while (dates.size < MAX_CALENDAR_DAYS) {
                 dates.add(monthCalendar.time)
                 monthCalendar.add(Calendar.DAY_OF_MONTH, 1)
-
+                val act = context as AppCompatActivity
+                act.runOnUiThread {
+                    gridAdapter = CalendarGridAdapter(context, dates, calendar, events)
+                    gridView.adapter = gridAdapter
+                }
             }
-
-            gridAdapter = CalendarGridAdapter(context, dates, calendar, events)
-            gridView.adapter = gridAdapter
         }
 
     }
 
     private fun collectEventsPerMonth(month: String, year: String) {
         events.clear()
+        var isComplete = false
         val convertedMonth = convertStringToMonthNum(month)
         val reference = database.getReference("UserEvent")
         val valueEventListener = object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (users in snapshot.children) {
+                    if (isComplete)
+                        break
                     if (users.key == auth.uid) {
                         for (date in users.children) {
                             val mnth = date.key!!.split('-')[1]
@@ -188,6 +193,7 @@ open class CalendarView(context: Context?) : LinearLayout(context) {
                         }
                     }
                 }
+                isComplete = true
                 Log.d("Events", events.toString())
             }
 

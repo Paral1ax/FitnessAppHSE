@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Switch
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -23,12 +24,7 @@ import kotlin.coroutines.CoroutineContext
 class AddFriendRecyclerAdapter(): RecyclerView.Adapter<AddFriendRecyclerAdapter.ViewHolder>() {
 
     var context: Context? = null
-
-    constructor(context: Context, recyclerViewClickListener: RecyclerViewClickListener) : this() {
-        this.context = context
-        recyclerClickListener = recyclerViewClickListener
-    }
-
+    var delegate: RecyclerViewClickListener? = null
     private var friends = mutableListOf<ShowFriend>()
     var database: FirebaseDatabase? = null
     var databaseReference: DatabaseReference? = null
@@ -66,10 +62,17 @@ class AddFriendRecyclerAdapter(): RecyclerView.Adapter<AddFriendRecyclerAdapter.
         holder.image?.setImageResource(R.drawable.lunch1)
         holder.name?.text = friends[position].name
         holder.isCoach!!.isChecked = true
+        holder.addFriendButton!!.setOnClickListener {
+            delegate!!.recyclerViewListClicked(position)
+        }
     }
 
     override fun getItemCount(): Int {
         return friends.count()
+    }
+
+    fun attachDelegate(delegate: RecyclerViewClickListener) {
+        this.delegate = delegate
     }
 
     companion object {
@@ -78,14 +81,5 @@ class AddFriendRecyclerAdapter(): RecyclerView.Adapter<AddFriendRecyclerAdapter.
         fun getAdapterPos(): Int {
             return itemPos
         }
-
-        class ItemViewHolder(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener {
-            override fun onClick(p0: View?) {
-                recyclerClickListener?.recyclerViewListClicked(p0, layoutPosition)
-
-            }
-        }
-
-        var recyclerClickListener: RecyclerViewClickListener? = null
     }
 }

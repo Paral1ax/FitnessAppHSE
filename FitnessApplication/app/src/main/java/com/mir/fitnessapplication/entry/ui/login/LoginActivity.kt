@@ -11,9 +11,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.Exclude
 import com.mir.fitnessapplication.R
 import com.mir.fitnessapplication.entry.ui.register.RegisterActivity
 import com.mir.fitnessapplication.entry.ui.register.data.FirebaseURL
+import com.mir.fitnessapplication.entry.ui.register.data.UserData
 import com.mir.fitnessapplication.main.MainActivity
 
 
@@ -73,11 +75,13 @@ class LoginActivity : AppCompatActivity(){
         super.onStart()
         val currentUser: FirebaseUser? = firebaseAuth?.currentUser
         if (currentUser != null) {
-            var start = startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+            this.finish()
         }
     }
 
     private fun signIn() {
+        Thread {
         firebaseAuth?.signInWithEmailAndPassword(loginTextFiled?.text.toString(), passwordTextFiled?.text.toString())
             ?.addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
@@ -89,14 +93,21 @@ class LoginActivity : AppCompatActivity(){
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w("tag", "signInWithEmail:failure", task.exception)
-                    wrongUsernameOrPassword?.visibility = TextView.VISIBLE
+                    this.runOnUiThread {
+                        wrongUsernameOrPassword?.visibility = TextView.VISIBLE
+                    }
                 }
             }
+        }.start()
     }
 
     private fun updateUI(user: FirebaseUser?) {
-        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+        this.runOnUiThread {
+            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+        }
     }
 
-
+    companion object {
+        var userdata: UserData? = null
+    }
 }

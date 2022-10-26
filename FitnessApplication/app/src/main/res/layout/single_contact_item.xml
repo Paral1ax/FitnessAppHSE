@@ -19,6 +19,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <View
+        android:id="@+id/state_indicator_contacts"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="45dp"
+        android:background="@drawable/round_circle"
+        app:layout_constraintBottom_toBottomOf="@+id/chat_user_profile_pic"
+        app:layout_constraintEnd_toEndOf="@+id/chat_user_profile_pic"
+        app:layout_constraintStart_toEndOf="@+id/chat_user_profile_pic"
+        app:layout_constraintStart_toStartOf="@+id/chat_user_profile_pic"
+        app:layout_constraintTop_toTopOf="@+id/chat_user_profile_pic" />
+
     <TextView
         android:id="@+id/companion_name_surname"
         android:layout_width="wrap_content"

@@ -13,7 +13,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.mir.fitnessapplication.R
+import com.mir.fitnessapplication.entry.ui.login.LoginActivity
 import com.mir.fitnessapplication.main.MainActivity
+import com.mir.fitnessapplication.main.ui.messenger.AppStates
 
 
 class DataActivity : AppCompatActivity(){
@@ -64,11 +66,13 @@ class DataActivity : AppCompatActivity(){
         if (auth?.currentUser != null){
 
             if (username?.text!!.isNotEmpty() && nameAndSurnameText?.text!!.length > 5) {
-                val data = UserData(username!!.text.toString(), nameAndSurnameText!!.text.toString())
+
+                val data = UserData(username!!.text.toString(), nameAndSurnameText!!.text.toString(), "0", "+7", AppStates.ONLINE.state)
                 database?.getReference("UserData")
                     ?.child(FirebaseAuth.getInstance().currentUser!!.uid)!!.setValue(data)
                     .addOnCompleteListener {
                         Toast.makeText(this@DataActivity, "Successful Registered", Toast.LENGTH_SHORT).show()
+                        LoginActivity.userdata = data
                     }
                 val intent = Intent(this@DataActivity, MainActivity::class.java)
                 startActivity(intent)
